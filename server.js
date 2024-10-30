@@ -15,7 +15,7 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors');
 
 const corsOptions = {
-  origin: '*',
+  origin: "https://final-frontend-navy.vercel.app/",
   credentials: true,
   optionSuccessStatus: 200,
 }
