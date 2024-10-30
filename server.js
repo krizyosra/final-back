@@ -14,17 +14,26 @@ const Routeorder = require("./Routes/OrderRoute")
 const cookieParser = require('cookie-parser')
 const cors = require('cors');
 
-const corsOptions = {
-  origin: "https://final-frontend-navy.vercel.app/",
-  credentials: true,
-  optionSuccessStatus: 200,
-}
+const allowedOrigins = ['https://client-jade-chi.vercel.app'];
+
+  const corsOptions = {
+    origin: function (origin, callback) {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,  // Si vous travaillez avec des cookies ou des sessions
+  };
+  
+  app.use(cors(corsOptions));
 
 
 const connect = require("./Config/Connect");
 connect();
 
-app.use(cors(corsOptions))
+//app.use(cors(corsOptions))
 app.use("/uploads",express.static(__dirname+"/uploads"))
 const port = process.env.PORT;
 
